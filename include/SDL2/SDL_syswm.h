@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2024 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -52,7 +52,7 @@ struct SDL_SysWMinfo;
 #ifndef NOMINMAX   /* don't define min() and max(). */
 #define NOMINMAX
 #endif
-// #include <windows.h>
+#include <windows.h>
 #endif
 
 #if defined(SDL_VIDEO_DRIVER_WINRT)
@@ -160,14 +160,14 @@ struct SDL_SysWMmsg
     SDL_SYSWM_TYPE subsystem;
     union
     {
-// #if defined(SDL_VIDEO_DRIVER_WINDOWS)
-//         struct {
-//             HWND hwnd;                  /**< The window for the message */
-//             UINT msg;                   /**< The type of message */
-//             WPARAM wParam;              /**< WORD message parameter */
-//             LPARAM lParam;              /**< LONG message parameter */
-//         } win;
-// #endif
+#if defined(SDL_VIDEO_DRIVER_WINDOWS)
+        struct {
+            HWND hwnd;                  /**< The window for the message */
+            UINT msg;                   /**< The type of message */
+            WPARAM wParam;              /**< WORD message parameter */
+            LPARAM lParam;              /**< LONG message parameter */
+        } win;
+#endif
 #if defined(SDL_VIDEO_DRIVER_X11)
         struct {
             XEvent event;
@@ -229,14 +229,14 @@ struct SDL_SysWMinfo
     SDL_SYSWM_TYPE subsystem;
     union
     {
-// #if defined(SDL_VIDEO_DRIVER_WINDOWS)
-//         struct
-//         {
-//             HWND window;                /**< The window handle */
-//             HDC hdc;                    /**< The window device context */
-//             HINSTANCE hinstance;        /**< The instance handle */
-//         } win;
-// #endif
+#if defined(SDL_VIDEO_DRIVER_WINDOWS)
+        struct
+        {
+            HWND window;                /**< The window handle */
+            HDC hdc;                    /**< The window device context */
+            HINSTANCE hinstance;        /**< The instance handle */
+        } win;
+#endif
 #if defined(SDL_VIDEO_DRIVER_WINRT)
         struct
         {
