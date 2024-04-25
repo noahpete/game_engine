@@ -1,0 +1,193 @@
+﻿  glm.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_sdl2.cpp
+  imgui_impl_sdlrenderer2.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  Gui.cpp
+  Application.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+  Defining YAML_CPP_API for DLL import
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\parser.h(85,28): warning C4251: 'YAML::Parser::m_pScanner': class 'std::unique_ptr<YAML::Scanner,std::default_delete<YAML::Scanner>>' needs to have dll-interface to be used by clients of class 'YAML::Parser'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\parser.h(85,8):
+  see declaration of 'std::unique_ptr<YAML::Scanner,std::default_delete<YAML::Scanner>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\parser.h(86,31): warning C4251: 'YAML::Parser::m_pDirectives': class 'std::unique_ptr<YAML::Directives,std::default_delete<YAML::Directives>>' needs to have dll-interface to be used by clients of class 'YAML::Parser'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\parser.h(86,8):
+  see declaration of 'std::unique_ptr<YAML::Directives,std::default_delete<YAML::Directives>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\binary.h(65,30): warning C4251: 'YAML::Binary::m_data': class 'std::vector<unsigned char,std::allocator<unsigned char>>' needs to have dll-interface to be used by clients of class 'YAML::Binary'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\binary.h(18,19):
+  see declaration of 'std::vector<unsigned char,std::allocator<unsigned char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\ostream_wrapper.h(49,29): warning C4251: 'YAML::ostream_wrapper::m_buffer': class 'std::vector<char,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::ostream_wrapper'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\ostream_wrapper.h(49,16):
+  see declaration of 'std::vector<char,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\emitter.h(132,33): warning C4251: 'YAML::Emitter::m_pState': class 'std::unique_ptr<YAML::EmitterState,std::default_delete<YAML::EmitterState>>' needs to have dll-interface to be used by clients of class 'YAML::Emitter'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\emitter.h(132,8):
+  see declaration of 'std::unique_ptr<YAML::EmitterState,std::default_delete<YAML::EmitterState>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\exceptions.h(153,44): warning C4275: non dll-interface class 'std::runtime_error' used as base for dll-interface class 'YAML::Exception'
+  (compiling source file 'src/Application.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\stdexcept(100,19):
+  see declaration of 'std::runtime_error'
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\exceptions.h(153,20):
+  see declaration of 'YAML::Exception'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\exceptions.h(162,15): warning C4251: 'YAML::Exception::msg': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::Exception'
+  (compiling source file 'src/Application.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\node.h(135,15): warning C4251: 'YAML::Node::m_invalidKey': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::Node'
+  (compiling source file 'src/Application.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\node.h(136,40): warning C4251: 'YAML::Node::m_pMemory': class 'std::shared_ptr<YAML::detail::memory_holder>' needs to have dll-interface to be used by clients of class 'YAML::Node'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\ptr.h(23,35):
+  see declaration of 'std::shared_ptr<YAML::detail::memory_holder>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\memory.h(31,9): warning C4251: 'YAML::detail::memory::m_nodes': class 'std::set<YAML::detail::shared_node,std::less<YAML::detail::shared_node>,std::allocator<YAML::detail::shared_node>>' needs to have dll-interface to be used by clients of class 'YAML::detail::memory'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\memory.h(30,22):
+  see declaration of 'std::set<YAML::detail::shared_node,std::less<YAML::detail::shared_node>,std::allocator<YAML::detail::shared_node>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\memory.h(42,17): warning C4251: 'YAML::detail::memory_holder::m_pMemory': class 'std::shared_ptr<YAML::detail::memory>' needs to have dll-interface to be used by clients of class 'YAML::detail::memory_holder'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\ptr.h(24,28):
+  see declaration of 'std::shared_ptr<YAML::detail::memory>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(104,15): warning C4251: 'YAML::detail::node_data::m_tag': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/Application.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(108,15): warning C4251: 'YAML::detail::node_data::m_scalar': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/Application.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(112,12): warning C4251: 'YAML::detail::node_data::m_sequence': class 'std::vector<YAML::detail::node *,std::allocator<YAML::detail::node *>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_iterator.h(39,23):
+  see declaration of 'std::vector<YAML::detail::node *,std::allocator<YAML::detail::node *>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(118,12): warning C4251: 'YAML::detail::node_data::m_map': class 'std::vector<std::pair<YAML::detail::node *,YAML::detail::node *>,std::allocator<std::pair<YAML::detail::node *,YAML::detail::node *>>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_iterator.h(40,23):
+  see declaration of 'std::vector<std::pair<YAML::detail::node *,YAML::detail::node *>,std::allocator<std::pair<YAML::detail::node *,YAML::detail::node *>>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(122,20): warning C4251: 'YAML::detail::node_data::m_undefinedPairs': class 'std::list<YAML::detail::node_data::kv_pair,std::allocator<std::pair<YAML::detail::node *,YAML::detail::node *>>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/Application.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(121,25):
+  see declaration of 'std::list<YAML::detail::node_data::kv_pair,std::allocator<std::pair<YAML::detail::node *,YAML::detail::node *>>>'
+  
+  main.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+  Defining YAML_CPP_API for DLL import
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\parser.h(85,28): warning C4251: 'YAML::Parser::m_pScanner': class 'std::unique_ptr<YAML::Scanner,std::default_delete<YAML::Scanner>>' needs to have dll-interface to be used by clients of class 'YAML::Parser'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\parser.h(85,8):
+  see declaration of 'std::unique_ptr<YAML::Scanner,std::default_delete<YAML::Scanner>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\parser.h(86,31): warning C4251: 'YAML::Parser::m_pDirectives': class 'std::unique_ptr<YAML::Directives,std::default_delete<YAML::Directives>>' needs to have dll-interface to be used by clients of class 'YAML::Parser'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\parser.h(86,8):
+  see declaration of 'std::unique_ptr<YAML::Directives,std::default_delete<YAML::Directives>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\binary.h(65,30): warning C4251: 'YAML::Binary::m_data': class 'std::vector<unsigned char,std::allocator<unsigned char>>' needs to have dll-interface to be used by clients of class 'YAML::Binary'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\binary.h(18,19):
+  see declaration of 'std::vector<unsigned char,std::allocator<unsigned char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\ostream_wrapper.h(49,29): warning C4251: 'YAML::ostream_wrapper::m_buffer': class 'std::vector<char,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::ostream_wrapper'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\ostream_wrapper.h(49,16):
+  see declaration of 'std::vector<char,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\emitter.h(132,33): warning C4251: 'YAML::Emitter::m_pState': class 'std::unique_ptr<YAML::EmitterState,std::default_delete<YAML::EmitterState>>' needs to have dll-interface to be used by clients of class 'YAML::Emitter'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\emitter.h(132,8):
+  see declaration of 'std::unique_ptr<YAML::EmitterState,std::default_delete<YAML::EmitterState>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\exceptions.h(153,44): warning C4275: non dll-interface class 'std::runtime_error' used as base for dll-interface class 'YAML::Exception'
+  (compiling source file 'src/main.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\stdexcept(100,19):
+  see declaration of 'std::runtime_error'
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\exceptions.h(153,20):
+  see declaration of 'YAML::Exception'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\exceptions.h(162,15): warning C4251: 'YAML::Exception::msg': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::Exception'
+  (compiling source file 'src/main.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\node.h(135,15): warning C4251: 'YAML::Node::m_invalidKey': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::Node'
+  (compiling source file 'src/main.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\node.h(136,40): warning C4251: 'YAML::Node::m_pMemory': class 'std::shared_ptr<YAML::detail::memory_holder>' needs to have dll-interface to be used by clients of class 'YAML::Node'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\ptr.h(23,35):
+  see declaration of 'std::shared_ptr<YAML::detail::memory_holder>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\memory.h(31,9): warning C4251: 'YAML::detail::memory::m_nodes': class 'std::set<YAML::detail::shared_node,std::less<YAML::detail::shared_node>,std::allocator<YAML::detail::shared_node>>' needs to have dll-interface to be used by clients of class 'YAML::detail::memory'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\memory.h(30,22):
+  see declaration of 'std::set<YAML::detail::shared_node,std::less<YAML::detail::shared_node>,std::allocator<YAML::detail::shared_node>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\memory.h(42,17): warning C4251: 'YAML::detail::memory_holder::m_pMemory': class 'std::shared_ptr<YAML::detail::memory>' needs to have dll-interface to be used by clients of class 'YAML::detail::memory_holder'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\ptr.h(24,28):
+  see declaration of 'std::shared_ptr<YAML::detail::memory>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(104,15): warning C4251: 'YAML::detail::node_data::m_tag': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/main.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(108,15): warning C4251: 'YAML::detail::node_data::m_scalar': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/main.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(112,12): warning C4251: 'YAML::detail::node_data::m_sequence': class 'std::vector<YAML::detail::node *,std::allocator<YAML::detail::node *>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_iterator.h(39,23):
+  see declaration of 'std::vector<YAML::detail::node *,std::allocator<YAML::detail::node *>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(118,12): warning C4251: 'YAML::detail::node_data::m_map': class 'std::vector<std::pair<YAML::detail::node *,YAML::detail::node *>,std::allocator<std::pair<YAML::detail::node *,YAML::detail::node *>>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_iterator.h(40,23):
+  see declaration of 'std::vector<std::pair<YAML::detail::node *,YAML::detail::node *>,std::allocator<std::pair<YAML::detail::node *,YAML::detail::node *>>>'
+  
+C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(122,20): warning C4251: 'YAML::detail::node_data::m_undefinedPairs': class 'std::list<YAML::detail::node_data::kv_pair,std::allocator<std::pair<YAML::detail::node *,YAML::detail::node *>>>' needs to have dll-interface to be used by clients of class 'YAML::detail::node_data'
+  (compiling source file 'src/main.cpp')
+  C:\Users\Noah\projects\game_engine\include\yaml-cpp\node\detail\node_data.h(121,25):
+  see declaration of 'std::list<YAML::detail::node_data::kv_pair,std::allocator<std::pair<YAML::detail::node *,YAML::detail::node *>>>'
+  
+  Renderer.cpp
+  Generating code
+  Compiler switch has changed, fall back to full compilation.
+  All 2740 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  game_engine.vcxproj -> C:\Users\Noah\projects\game_engine\x64\Release\game_engine.exe
+  dlls\c4core.dll
+  dlls\ryml.dll
+  dlls\SDL2.dll
+  dlls\SDL2_image.dll
+  dlls\SDL2_mixer.dll
+  dlls\SDL2_ttf.dll
+  dlls\yaml-cppd.dll
+          7 file(s) copied.

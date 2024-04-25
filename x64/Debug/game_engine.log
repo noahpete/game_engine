@@ -1,0 +1,9 @@
+﻿  game_engine.vcxproj -> C:\Users\Noah\projects\game_engine\x64\Debug\game_engine.exe
+  dlls\c4core.dll
+  dlls\ryml.dll
+  dlls\SDL2.dll
+  dlls\SDL2_image.dll
+  dlls\SDL2_mixer.dll
+  dlls\SDL2_ttf.dll
+  dlls\yaml-cppd.dll
+          7 file(s) copied.

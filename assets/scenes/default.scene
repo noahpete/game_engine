@@ -1,0 +1,49 @@
+---
+name: default
+actors:
+- name: GameManager
+  components:
+    GameManager: 
+- name: background1
+  components:
+    Transform:
+      position_x: 0
+      position_y: 0
+      scale_x: 1
+      scale_y: 1
+      rotation: 0
+    MovingBackground: 
+    Sprite:
+      image_name: background
+- name: background2
+  components:
+    Transform:
+      position_x: 667
+      position_y: 0
+      scale_x: 1
+      scale_y: 1
+      rotation: 0
+    MovingBackground: 
+    Sprite:
+      image_name: background
+- name: donna
+  components:
+    Transform:
+      position_x: 100
+      position_y: 100
+      scale_x: 1
+      scale_y: 1
+      rotation: 0
+    Donna: 
+    KeyboardControl: 
+    DonnaAnimation: 
+    Sprite:
+      image_name: donna1
+- name: bgm
+  components:
+    PlayAudio:
+      clip: sky_bgm
+      loop: true
+- name: hud
+  components:
+    Hud: 
