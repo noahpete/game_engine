@@ -75,8 +75,10 @@ void SceneSerializer::Deserialize(const std::string& path)
 
 			for (const auto& compPair : component)
 			{
-				if (IsBool(compPair.second))
-					ref[compPair.first.as<std::string>()] = compPair.second.as<bool>();
+				// Order of checking matters...
+
+				if (IsString(compPair.second))
+ 					ref[compPair.first.as<std::string>()] = compPair.second.as<std::string>();
 
 				if (IsInt(compPair.second))
 					ref[compPair.first.as<std::string>()] = compPair.second.as<int>();
@@ -84,8 +86,8 @@ void SceneSerializer::Deserialize(const std::string& path)
 				if (IsFloat(compPair.second))
 					ref[compPair.first.as<std::string>()] = compPair.second.as<float>();
 
-				if (IsString(compPair.second))
- 					ref[compPair.first.as<std::string>()] = compPair.second.as<std::string>();
+				if (IsBool(compPair.second))
+					ref[compPair.first.as<std::string>()] = compPair.second.as<bool>();
 			}
 		}
 
