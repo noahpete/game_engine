@@ -2,18 +2,22 @@
 
 bool Application::sRunning;
 bool Application::sGameRunning;
+int Application::sFrameNumber;
 YAML::Node Configurator::EditorConfig;
 YAML::Node Configurator::GameConfig;
 YAML::Node Configurator::RenderConfig;
+
 
 Application::Application()
 {
 	Configurator::LoadConfigs();
 
 	mRenderer = new Renderer();
+	mLuaManager = new LuaManager();
 	mGui = new Gui();
 	mScene = new Scene();
-	mLuaManager = new LuaManager();
+
+	FrameCounter::Reset();
 
 	sRunning = true;
 	sGameRunning = false;
@@ -61,16 +65,17 @@ void Application::Update()
 		if (InputHandler::GetKey("escape"))
 		{
 			sGameRunning = false;
-			InputHandler::ResetKeys();
-			Scene::Reset();
+			return;
 		}
 
 		InputHandler::LateUpdate();
 		Scene::LateUpdate();
 
-		Physics::GetWorld()->Step(1.0f / 60.0f, 8, 3);
+		//GE_CORE_INFO("Frame: " + std::to_string(FrameCounter::GetFrameNumber()));
+		FrameCounter::Increment();
 	}
 
+	Scene::Render();
 }
 
 void Application::Render()
@@ -89,12 +94,22 @@ void Application::OnModeChange()
 		// Editor -> Game
 		if (sGameRunning)
 		{
+			mSavedScene = mScene;
+			FrameCounter::Reset();
 			SDL_ShowWindow(Renderer::GetGameWindow());
 		}
 
 		// Game -> Editor
 		else
 		{
+			Scene::Reset();
+			Camera::Reset(); // TODO: make it so state is saved then retrieved   
+
+			SceneSerializer serializer(mScene);
+			std::string path = "assets/scenes/" + mScene->GetName() + ".scene";
+			serializer.Deserialize(path);
+
+			InputHandler::ResetKeys();
 			SDL_HideWindow(Renderer::GetGameWindow());
 		}
 	}

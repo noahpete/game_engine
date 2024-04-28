@@ -1,3 +1,9 @@
+C:\Users\Noah\projects\game_engine\src\Editor\Editor.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Editor.obj
+C:\Users\Noah\projects\game_engine\src\FrameCounter.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\FrameCounter.obj
+C:\Users\Noah\projects\game_engine\src\Render\Camera.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Camera.obj
+C:\Users\Noah\projects\game_engine\src\Render\RenderRequest.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\RenderRequest.obj
+C:\Users\Noah\projects\game_engine\src\Keys.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Keys.obj
+C:\Users\Noah\projects\game_engine\src\Component.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Component.obj
 C:\Users\Noah\projects\game_engine\include\box2d\collision\b2_broad_phase.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\b2_broad_phase.obj
 C:\Users\Noah\projects\game_engine\include\box2d\collision\b2_chain_shape.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\b2_chain_shape.obj
 C:\Users\Noah\projects\game_engine\include\box2d\collision\b2_circle_shape.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\b2_circle_shape.obj
@@ -76,11 +82,8 @@ C:\Users\Noah\projects\game_engine\include\lua\lutf8lib.c;C:\Users\Noah\projects
 C:\Users\Noah\projects\game_engine\include\lua\lvm.c;C:\Users\Noah\projects\game_engine\x64\Debug\lvm.obj
 C:\Users\Noah\projects\game_engine\include\lua\lzio.c;C:\Users\Noah\projects\game_engine\x64\Debug\lzio.obj
 C:\Users\Noah\projects\game_engine\src\LuaManager.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\LuaManager.obj
-C:\Users\Noah\projects\game_engine\src\Components\Physics.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Physics.obj
-C:\Users\Noah\projects\game_engine\src\Components\Transform.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Transform.obj
 C:\Users\Noah\projects\game_engine\src\Log.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Log.obj
 C:\Users\Noah\projects\game_engine\src\InputHandler.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\InputHandler.obj
-C:\Users\Noah\projects\game_engine\src\Components\Component.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Component.obj
 C:\Users\Noah\projects\game_engine\src\Scene\SceneSerializer.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\SceneSerializer.obj
 C:\Users\Noah\projects\game_engine\src\Actor.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Actor.obj
 C:\Users\Noah\projects\game_engine\include\glm\detail\glm.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\glm.obj
@@ -92,7 +95,8 @@ C:\Users\Noah\projects\game_engine\include\imgui\imgui_impl_sdlrenderer2.cpp;C:\
 C:\Users\Noah\projects\game_engine\include\imgui\imgui_tables.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\imgui_tables.obj
 C:\Users\Noah\projects\game_engine\include\imgui\imgui_widgets.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\imgui_widgets.obj
 C:\Users\Noah\projects\game_engine\src\Scene\Scene.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Scene.obj
-C:\Users\Noah\projects\game_engine\src\Render\Gui.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Gui.obj
+C:\Users\Noah\projects\game_engine\src\Editor\Gui.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Gui.obj
 C:\Users\Noah\projects\game_engine\src\Application.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Application.obj
 C:\Users\Noah\projects\game_engine\src\main.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\main.obj
 C:\Users\Noah\projects\game_engine\src\Render\Renderer.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\Renderer.obj
+C:\Users\Noah\projects\game_engine\src\Scene\TemplateManager.cpp;C:\Users\Noah\projects\game_engine\x64\Debug\TemplateManager.obj

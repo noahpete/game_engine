@@ -11,7 +11,7 @@ Donna = {
 
 		-- projectile spawning
 		if Input.GetKey("space") and Application.GetFrame() % 10 == 0 then
-			new_projectile = Actor.Instantiate("Projectile")
+			new_projectile = Actor.Instantiate("projectile")
 			new_projectile_transform = new_projectile:GetComponent("Transform")
 			new_projectile_transform.x = self.transform.x
 			new_projectile_transform.y = self.transform.y
@@ -39,9 +39,10 @@ Donna = {
 
 	TakeDamage = function(self)
 		if self.iframe_cooldown <= 0 then
-			if game_over == false then
-				Audio.Play(1, "ouch", false)
-			end
+			--if game_over == false then
+				--Audio.Play(1, "ouch", false)
+			--end
+			
 			self.lives = self.lives - 1
 			self.iframe_cooldown = 90
 		end

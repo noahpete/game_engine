@@ -1,10 +1,19 @@
 #pragma once
 
+#include <filesystem>
 #include <unordered_map>
 #include "lua/lua.hpp"
 #include "luabridge/LuaBridge.h"
-#include "Components/Component.h"
-#include "Components/Components.h"
+#include "InputHandler.h"
+#include "Actor.h"
+#include "Component.h"
+#include "Render/RenderRequest.h"
+#include "Render/Camera.h"
+#include "FrameCounter.h"
+#include "Scene/Scene.h"
+
+class Component;
+class Actor;
 
 class LuaManager
 {
@@ -13,24 +22,18 @@ public:
 	~LuaManager();
 
 	void AddNamespaces();
-	void AddDefaultComponentNamespaces();
 	void LoadComponent(std::string componentType);
-	void EstablishInheritance(luabridge::LuaRef& instance, luabridge::LuaRef& parent);
+	void LoadComponents();
+	static void EstablishInheritance(luabridge::LuaRef& instance, luabridge::LuaRef& parent);
 
-	template<class T>
-	Component* LoadDefaultComponent()
-	{
-		Component* component = new Component("Default");
-		T* t = new T();
-		luabridge::LuaRef componentRef(sL, t);
-		component->GetRef() = componentRef;
-		return component;
-	}
+	static lua_State* GetLuaState() { return sL; }
+	static Component* GetComponent(std::string type) { return sComponentDb[type]; }
 
 	static void Log(const std::string& text);
 	static void LogErr(const std::string& text);
 	static void Quit();
-	static int GetFrame();
+
+	// TODO: make separate Lua subclasses: LuaInput, LuaApplication, LuaActor, etc.
 
 private:
 	static lua_State* sL;

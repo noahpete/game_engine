@@ -2,55 +2,43 @@
 
 #include <string>
 #include <vector>
-#include "Components/Component.h"
+#include "lua/lua.hpp"
+#include "luabridge/LuaBridge.h"
+#include "LuaManager.h"
+#include "Component.h"
+#include "Keys.h"
 
 class Component;
+class LuaManager;
 
 class Actor
 {
+	friend class TemplateManager;
+
 public:
-	Actor(std::string name)
-		: mName(name) {}
+	luabridge::LuaRef Ref;
+	bool mDontDestroy = false;
+	bool mEnabled = true;
+
+	Actor(std::string name);
 
 	void Start();
 	void Update();
 	void LateUpdate();
+	void Render();
 	void Destroy();
+	void UpdateRenderComponents();
+
+	void AddComponent(Component* component);
 
 	std::string& GetName() { return mName; }
 	bool IsInitialized() { return mInitialized; }
-
-	template<class T>
-	T* AddComponent()
-	{
-		T* newComponent = new T;
-		newComponent->mParent = this;
-		mComponents.push_back(newComponent);
-		return newComponent;
-	}
-
-	template<class T>
-	T* GetComponent()
-	{
-		for (Component* component : mComponents)
-		{
-			T* castedComponent = dynamic_cast<T*>(component);
-			if (castedComponent)
-				return castedComponent;
-		}
-		return nullptr;
-	}
-
-	template<class T>
-	T* GetOrAddComponent()
-	{
-		T* component = GetComponent<T>();
-		if (component)
-			return component;
-		return AddComponent<T>();
-	}
-
 	std::vector<Component*>& GetComponents() { return mComponents; }
+
+	luabridge::LuaRef LuaGetComponent(std::string type);
+	luabridge::LuaRef LuaGetComponents(std::string type);
+	luabridge::LuaRef LuaAddComponent(std::string componentType);
+	void LuaRemoveComponent(luabridge::LuaRef componentRef);
 
 private:
 	bool mInitialized = false;

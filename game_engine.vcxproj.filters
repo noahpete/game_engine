@@ -24,7 +24,7 @@
     <ClCompile Include="src\Render\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render\Gui.cpp">
+    <ClCompile Include="src\Editor\Gui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\imgui\imgui.cpp">
@@ -58,9 +58,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene\SceneSerializer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InputHandler.cpp">
@@ -204,12 +201,6 @@
     <ClCompile Include="include\box2d\rope\b2_rope.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Components\Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Physics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\LuaManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -309,6 +300,27 @@
     <ClCompile Include="include\lua\lzio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Keys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\RenderRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\TemplateManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\Editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -338,7 +350,7 @@
     <ClInclude Include="include\ryml\ryml_std.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\Gui.h">
+    <ClInclude Include="src\Editor\Gui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\imgui\imconfig.h">
@@ -1775,28 +1787,10 @@
     <ClInclude Include="src\Scene\SceneSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Components.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\Custom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Physics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\box2d\dynamics\b2_chain_circle_contact.h">
@@ -2181,6 +2175,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\luabridge\Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Keys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\RenderRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\TemplateManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Editor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -31,7 +31,7 @@ GameManager = {
 	end,
 
 	SpawnEnemy = function(self)
-		local new_enemy = Actor.Instantiate("Enemy")
+		local new_enemy = Actor.Instantiate("enemy")
 		local enemy_transform = new_enemy:GetComponent("Transform")
 
 		-- Determine random sprite.

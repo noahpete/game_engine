@@ -10,15 +10,7 @@ LuaManager::LuaManager()
 
 	AddNamespaces();
 
-	// Load default components
-	Component* transformComponent = LoadDefaultComponent<Transform>();
-	sComponentDb["Transform"] = transformComponent;
-
-	Component* physicsComponent = LoadDefaultComponent<Physics>();
-	sComponentDb["Physics"] = physicsComponent;
-
-	Component* spriteComponent = LoadDefaultComponent<Sprite>();
-	sComponentDb["Sprite"] = spriteComponent;
+	LoadComponents();
 }
 
 LuaManager::~LuaManager()
@@ -33,47 +25,87 @@ void LuaManager::AddNamespaces()
 		.addFunction("LogError", LogErr)
 		.endNamespace();
 
+	// Actor class
 	luabridge::getGlobalNamespace(sL)
 		.beginClass<Actor>("Actor")
 		.addFunction("GetName", &Actor::GetName)
-		/*.addFunction("GetID", &Actor::GetID)
-		.addFunction("GetComponentByKey", &Actor::GetComponentByKey)
-		.addFunction("GetComponent", &Actor::GetComponent)
-		.addFunction("GetComponents", &Actor::GetComponents)
+		.addFunction("GetComponent", &Actor::LuaGetComponent)
+		.addFunction("GetComponents", &Actor::LuaGetComponents)
 		.addFunction("AddComponent", &Actor::LuaAddComponent)
-		.addFunction("RemoveComponent", &Actor::LuaRemoveComponent)*/
+		.addFunction("RemoveComponent", &Actor::LuaRemoveComponent)
 		.endClass();
 
-	AddDefaultComponentNamespaces();
-
-}
-
-void LuaManager::AddDefaultComponentNamespaces()
-{
+	// Actor namespace
 	luabridge::getGlobalNamespace(sL)
-		.beginClass<Transform>("Transform")
-		.addData("rotation", &Transform::Rotation)
-		.addData("position", &Transform::Position)
-		.addData("scale", &Transform::Scale)
-		.addFunction("OnStart", &Transform::Start)
-		.endClass();
+		.beginNamespace("Actor")
+		.addFunction("Find", &Scene::LuaFind)
+		.addFunction("FindAll", &Scene::LuaFindAll)
+		.addFunction("Instantiate", &Scene::LuaInstantiate)
+		.addFunction("Destroy", &Scene::LuaDestroy)
+		.endNamespace();
 
 	luabridge::getGlobalNamespace(sL)
-		.beginClass<Physics>("Physics")
-		.addData("body_type", &Physics::BodyType)
-		.addData("has_collider", &Physics::HasCollider)
-		.addData("has_trigger", &Physics::HasTrigger)
-		.addData("density", &Physics::Density)
-		.addData("gravity_scale", &Physics::GravityScale)
-		.addData("friction", &Physics::Friction)
-		.addData("angular_friction", &Physics::AngularFriction)
-		.addData("bounciness", &Physics::Bounciness)
+		.beginNamespace("Application")
+		.addFunction("GetFrame", &FrameCounter::GetFrameNumber)
+		.endNamespace();
+
+	// Input
+	luabridge::getGlobalNamespace(sL)
+		.beginNamespace("Input")
+		.addFunction("GetKey", InputHandler::GetKey)
+		.addFunction("GetKeyDown", InputHandler::GetKeyDown)
+		.addFunction("GetKeyUp", InputHandler::GetKeyUp)
+		.addFunction("GetMousePosition", InputHandler::GetMousePosition)
+		.addFunction("GetMouseButton", InputHandler::GetMouseButton)
+		.addFunction("GetMouseButtonDown", InputHandler::GetMouseButtonDown)
+		.addFunction("GetMouseButtonUp", InputHandler::GetMouseButtonUp)
+		.addFunction("GetMouseScrollDelta", InputHandler::GetMouseScrollDelta)
+		.endNamespace();
+
+	// glm vec2
+	luabridge::getGlobalNamespace(sL)
+		.beginClass<glm::vec2>("vec2")
+		.addConstructor<void (*) (float, float)>()
+		.addData("x", &glm::vec2::x)
+		.addData("y", &glm::vec2::y)
 		.endClass();
 
+	// Audio
+
+	// Text
+	luabridge::getGlobalNamespace(LuaManager::GetLuaState())
+		.beginNamespace("Text")
+		.addFunction("Draw", &RenderRequest::TextDraw)
+		.endNamespace();
+
+	// Image
 	luabridge::getGlobalNamespace(sL)
-		.beginClass<Sprite>("Sprite")
-		.addData("texture_name", &Sprite::TextureName)
-		.endClass();
+		.beginNamespace("Image")
+		.addFunction("DrawUI", &RenderRequest::ImageDrawUI)
+		.addFunction("DrawUIEx", &RenderRequest::ImageDrawUIEx)
+		.addFunction("Draw", &RenderRequest::ImageDraw)
+		.addFunction("DrawEx", &RenderRequest::ImageDrawEx)
+		.addFunction("DrawPixel", &RenderRequest::ImageDrawPixel)
+		.endNamespace();
+
+	// Camera
+	luabridge::getGlobalNamespace(sL)
+		.beginNamespace("Camera")
+		.addFunction("SetPosition", &Camera::SetPosition)
+		.addFunction("GetPositionX", &Camera::GetPositionX)
+		.addFunction("GetPositionY", &Camera::GetPositionY)
+		.addFunction("SetZoom", &Camera::SetZoom)
+		.addFunction("GetZoom", &Camera::GetZoom)
+		.endNamespace();
+
+	// Scene
+	luabridge::getGlobalNamespace(sL)
+		.beginNamespace("Scene")
+		.addFunction("Load", &Scene::LuaSceneLoad)
+		.addFunction("GetCurrent", &Scene::LuaSceneGetCurrent)
+		.addFunction("DontDestroy", &Scene::LuaSceneDontDestroy)
+		.endNamespace();
+
 
 }
 
@@ -84,10 +116,17 @@ void LuaManager::LoadComponent(std::string componentType)
 	if (luaL_dofile(sL, path.c_str()) != LUA_OK)
 		GE_ERROR("Problem with Lua file " + componentType);
 
-	Component* component = new Component("None");
+	Component* component = new Component();
 	luabridge::LuaRef parent = luabridge::getGlobal(sL, componentType.c_str());
-	EstablishInheritance(component->GetRef(), parent);
+	EstablishInheritance(component->Ref, parent);
 	sComponentDb[componentType] = component;
+}
+
+void LuaManager::LoadComponents()
+{
+	if (std::filesystem::exists("assets/components"))
+		for (const auto& componentPath : std::filesystem::directory_iterator("assets/components"))
+			LoadComponent(componentPath.path().stem().string());
 }
 
 void LuaManager::EstablishInheritance(luabridge::LuaRef& instance, luabridge::LuaRef& parent)
@@ -116,7 +155,3 @@ void LuaManager::Quit()
 	
 }
 
-int LuaManager::GetFrame()
-{
-	return 0;
-}

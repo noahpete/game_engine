@@ -112,35 +112,47 @@ bool InputHandler::GetKey(std::string key)
 
 bool InputHandler::GetKeyDown(std::string key)
 {
-    return false;
+	if (Scancodes.find(key) == Scancodes.end()) return false;
+	SDL_Scancode keycode = Scancodes.find(key)->second;
+	InputState keyState = m_KeyStates[keycode];
+	return keyState == JUST_BECAME_DOWN;
 }
 
 bool InputHandler::GetKeyUp(std::string key)
 {
-    return false;
+	if (Scancodes.find(key) == Scancodes.end()) return false;
+	SDL_Scancode keycode = Scancodes.find(key)->second;
+	InputState keyState = m_KeyStates[keycode];
+	return keyState == JUST_BECAME_UP;
 }
 
 glm::vec2 InputHandler::GetMousePosition()
 {
-    return glm::vec2();
+    return m_MousePosition;
 }
 
 bool InputHandler::GetMouseButton(int button)
 {
-    return false;
+	if (button < SDL_BUTTON_LEFT || button >= SDL_BUTTON_X2 + 1)
+		return false;
+	return m_MouseButtonStates[button] == DOWN || m_MouseButtonStates[button] == JUST_BECAME_DOWN;
 }
 
 bool InputHandler::GetMouseButtonDown(int button)
 {
-    return false;
+	if (button < SDL_BUTTON_LEFT || button >= SDL_BUTTON_X2 + 1)
+		return false;
+	return m_MouseButtonStates[button] == JUST_BECAME_DOWN;
 }
 
 bool InputHandler::GetMouseButtonUp(int button)
 {
-    return false;
+	if (button < SDL_BUTTON_LEFT || button >= SDL_BUTTON_X2 + 1)
+		return false;
+	return m_MouseButtonStates[button] == JUST_BECAME_UP;
 }
 
 float InputHandler::GetMouseScrollDelta()
 {
-    return 0.0f;
+    return m_MouseScrollDelta;
 }

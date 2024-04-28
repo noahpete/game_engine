@@ -62,15 +62,24 @@ void Renderer::StartFrame()
 {
 	SDL_SetRenderDrawColor(m_EditorRenderer, m_EditorClearColor.r, m_EditorClearColor.g, m_EditorClearColor.b, 255);
 	SDL_RenderClear(m_EditorRenderer);
+
+	SDL_SetRenderDrawColor(m_GameRenderer, m_GameClearColor.r, m_GameClearColor.g, m_GameClearColor.b, 255);
+	SDL_RenderClear(m_GameRenderer);
 }
 
 void Renderer::RenderFrame()
 {
 	RenderScene();
+	RenderUI();
 	RenderGui();
 
 	if (!Application::sGameRunning)
+	{
+		RenderGameToBmp();
 		SDL_RenderPresent(m_EditorRenderer);
+	}
+	else
+		RenderGameToScreen();
 }
 
 void Renderer::CleanupFrame()
@@ -97,36 +106,85 @@ void Renderer::RenderGui()
 
 void Renderer::RenderScene()
 {
-	auto& actors = Scene::GetActors();
+	std::vector<RenderRequest::ImageDrawRequest> imageRequests;
 
-	SDL_SetRenderDrawColor(m_GameRenderer, m_GameClearColor.r, m_GameClearColor.g, m_GameClearColor.b, 255);
-	SDL_RenderClear(m_GameRenderer);
+	while (!RenderRequest::GetImageDrawRequests().empty())
+	{
+		imageRequests.push_back(RenderRequest::GetImageDrawRequests().front());
+		RenderRequest::GetImageDrawRequests().pop();
+	}
 
-	for (Actor* actor : actors)
-		if (actor->GetComponent<Sprite>())
-			RenderActor(actor);
+	std::stable_sort(imageRequests.begin(), imageRequests.end(),
+		[](const RenderRequest::ImageDrawRequest& a, const RenderRequest::ImageDrawRequest& b)
+		{
+			return a.sortingOrder < b.sortingOrder;
+		});
 
-	// if editor mode
-	if (!Application::sGameRunning)
-		RenderGameToBmp();
-	else
-		RenderGameToScreen();
+	for (const RenderRequest::ImageDrawRequest& request : imageRequests)
+	{
+		// Units are scene space until render in SDL_RenderCopyEx
+
+		float cameraZoom = Camera::GetZoom();
+
+		SDL_RenderSetScale(m_GameRenderer, cameraZoom, cameraZoom);
+
+		SDL_Texture* texture = m_Textures[request.imageName];
+		SDL_Rect target;
+		SDL_QueryTexture(texture, NULL, NULL, &target.w, &target.h);
+
+		target.w = int(target.w * request.scaleX);
+		target.h = int(target.h * request.scaleY);
+
+		target.x = request.x * 100 + int(m_GameWindowSize.x * 0.5 / cameraZoom) - int(request.pivotX * target.w);
+		target.y = request.y * 100 + int(m_GameWindowSize.y * 0.5 / cameraZoom) - int(request.pivotY * target.h);
+
+		target.x -= Camera::GetPositionX() * 100;
+		target.y -= Camera::GetPositionY() * 100;
+
+		SDL_Point pivot = { int(request.pivotX * target.w * request.scaleX), int(request.pivotY * target.h * request.scaleY) };
+
+		SDL_SetTextureAlphaMod(texture, static_cast<uint8_t>(request.a));
+		SDL_SetTextureColorMod(texture, static_cast<uint8_t>(request.r), static_cast<uint8_t>(request.g), static_cast<uint8_t>(request.b));
+
+		SDL_RenderCopyEx(m_GameRenderer, texture, NULL, &target, request.rotationDegrees, &pivot, SDL_FLIP_NONE);
+	}
 }
 
-void Renderer::RenderActor(Actor* actor)
+void Renderer::RenderUI()
 {
-	Transform* tc = actor->GetComponent<Transform>();
-	Sprite* sc = actor->GetComponent<Sprite>();
-	SDL_Texture* texture = m_Textures[sc->TextureName];
+	std::vector<RenderRequest::ImageDrawRequest> UIRequests;
 
-	SDL_Rect actorView;
-	actorView.x = tc->Position.x;
-	actorView.y = tc->Position.y;
-	SDL_QueryTexture(texture, NULL, NULL, &actorView.w, &actorView.h);
+	while (!RenderRequest::GetUIDrawRequests().empty())
+	{
+		UIRequests.push_back(RenderRequest::GetUIDrawRequests().front());
+		RenderRequest::GetUIDrawRequests().pop();
+	}
 
-	SDL_Point pivot = { 0, 0 };
+	std::stable_sort(UIRequests.begin(), UIRequests.end(),
+		[](const RenderRequest::ImageDrawRequest& a, const RenderRequest::ImageDrawRequest& b)
+		{
+			return a.sortingOrder < b.sortingOrder;
+		});
 
-	SDL_RenderCopyEx(m_GameRenderer, texture, NULL, &actorView, tc->Rotation, &pivot, SDL_FLIP_NONE);
+	for (const RenderRequest::ImageDrawRequest& request : UIRequests)
+	{
+		SDL_RenderSetScale(m_GameRenderer, 1.0f, 1.0f);
+
+		SDL_Texture* texture = m_Textures[request.imageName];
+
+		SDL_Rect target;
+		SDL_QueryTexture(texture, NULL, NULL, &target.w, &target.h);
+
+		target.x = request.x;
+		target.y = request.y;
+
+		SDL_Point pivot = { int(request.pivotX), int(request.pivotY) };
+
+		SDL_SetTextureAlphaMod(texture, static_cast<uint8_t>(request.a));
+		SDL_SetTextureColorMod(texture, static_cast<uint8_t>(request.r), static_cast<uint8_t>(request.g), static_cast<uint8_t>(request.b));
+
+		SDL_RenderCopyEx(m_GameRenderer, texture, NULL, &target, request.rotationDegrees, &pivot, SDL_FLIP_NONE);
+	}
 }
 
 void Renderer::RenderGameToScreen()
@@ -152,5 +210,4 @@ void Renderer::RenderGameToBmp()
 
 	if (SDL_SaveBMP(frameSurface, outputPath.c_str()) != 0)
 		SDL_Log("SDL_SaveBMP() failed: %s", SDL_GetError());
-
 }

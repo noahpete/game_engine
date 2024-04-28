@@ -6,9 +6,11 @@
 #include "SDL2/SDL.h"
 #include "SDL2_image/SDL_image.h"
 #include "Configurator.h"
-#include "Render/Gui.h"
+#include "Editor/Gui.h"
 #include "Scene/Scene.h"
 #include "Application.h"
+#include "RenderRequest.h"
+#include "Camera.h"
 
 class Application;
 
@@ -26,7 +28,7 @@ public:
 
 	void RenderGui();
 	void RenderScene();
-	void RenderActor(Actor* actor);
+	void RenderUI();
 
 	void RenderGameToScreen();
 	void RenderGameToBmp();
@@ -45,5 +47,8 @@ private:
 	static SDL_Renderer* m_GameRenderer;
 
 	static std::unordered_map<std::string, SDL_Texture*> m_Textures;
+
+	Camera mCamera;
+
 
 };

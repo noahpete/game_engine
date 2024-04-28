@@ -29,25 +29,7 @@ void SceneSerializer::SerializeActor(YAML::Emitter& out, Actor* actor)
 
 	for (Component* component : actor->GetComponents())
 	{
-		auto sc = dynamic_cast<Sprite*>(component);
-		if (sc)
-		{
-			out << YAML::Key << "Sprite" << YAML::Value << YAML::BeginMap;
-			out << YAML::Key << "image_name" << YAML::Value << sc->TextureName;
-			out << YAML::EndMap;
-		}
-
-		auto tc = dynamic_cast<Transform*>(component);
-		if (tc)
-		{
-			out << YAML::Key << "Transform" << YAML::Value << YAML::BeginMap;
-			out << YAML::Key << "position_x" << YAML::Value << tc->Position.x;
-			out << YAML::Key << "position_y" << YAML::Value << tc->Position.y;
-			out << YAML::Key << "scale_x" << YAML::Value << tc->Scale.x;
-			out << YAML::Key << "scale_y" << YAML::Value << tc->Scale.y;
-			out << YAML::Key << "rotation" << YAML::Value << tc->Rotation;
-			out << YAML::EndMap;
-		}
+		
 	}
 
 	out << YAML::EndMap;
@@ -59,98 +41,119 @@ void SceneSerializer::Deserialize(const std::string& path)
 	YAML::Node data;
 	Configurator::ReadYamlFile(path, data);
 
-	mScene->mName = data["name"].as<std::string>();
-
 	for (const auto& actor : data["actors"])
 	{
 		std::string name = "";
+		std::string templateName = "";
+
 		if (actor["name"])
 			name = actor["name"].as<std::string>();
 
+		if (actor["template"])
+			templateName = actor["template"].as<std::string>();
+
 		Actor* deserialized = new Actor(name);
+
+		// TODO: apply template to deserialized (before overriding variables)
+		if (templateName != "")
+			TemplateManager::ApplyTemplate(templateName, deserialized);
 
 		for (const auto& pair : actor["components"])
 		{
- 			std::string componentType = pair.first.as<std::string>();
+ 			std::string componentName = pair.first.as<std::string>();
+			std::string componentType = pair.second["type"].as<std::string>();
 			auto component = pair.second;
 
-			// TODO: add custom Lua components
+			Component* newComponent = new Component();
+			newComponent->Type = componentType;
+			newComponent->Key = componentName;
+			deserialized->AddComponent(newComponent);
+			
+			Keys::AddComponent(componentName, newComponent);
 
-			if (componentType == "Transform")
+			luabridge::LuaRef& ref = newComponent->Ref;
+
+			for (const auto& compPair : component)
 			{
-				Transform* tc = deserialized->GetOrAddComponent<Transform>();
+				if (IsBool(compPair.second))
+					ref[compPair.first.as<std::string>()] = compPair.second.as<bool>();
 
-				if (component["position_x"])
-					tc->Position.x = component["position_x"].as<float>();
-				if (component["position_y"])
-					tc->Position.y = component["position_y"].as<float>();
-				if (component["rotation"])
-					tc->Rotation = component["rotation"].as<float>();
-				if (component["scale_x"])
-					tc->Scale.x = component["scale_x"].as<float>();
-				if (component["scale_y"])
-					tc->Scale.y = component["scale_y"].as<float>();
+				if (IsInt(compPair.second))
+					ref[compPair.first.as<std::string>()] = compPair.second.as<int>();
+
+				if (IsFloat(compPair.second))
+					ref[compPair.first.as<std::string>()] = compPair.second.as<float>();
+
+				if (IsString(compPair.second))
+ 					ref[compPair.first.as<std::string>()] = compPair.second.as<std::string>();
 			}
-
-			if (componentType == "Sprite")
-			{
-				Sprite* sc = deserialized->GetOrAddComponent<Sprite>();
-				if (component["image_name"])
-					sc->TextureName = component["image_name"].as<std::string>();
-			}
-
-			if (componentType == "Physics")
-			{
-				Physics* pc = deserialized->GetOrAddComponent<Physics>();
-				if (component["body_type"])
-					pc->BodyType = component["body_type"].as<std::string>();
-				if (component["precise"])
-					pc->Precise = component["precise"].as<bool>();
-				if (component["density"])
-					pc->Density = component["density"].as<float>();
-				if (component["gravity_scale"])
-					pc->GravityScale = component["gravity_scale"].as<float>();
-				if (component["friction"])
-					pc->Friction = component["friction"].as<float>();
-				if (component["angular_friction"])
-					pc->AngularFriction = component["angular_friction"].as<float>();
-				if (component["bounciness"])
-					pc->Bounciness = component["bounciness"].as<float>();
-				if (component["has_collider"])
-					pc->HasCollider = component["has_collider"].as<bool>();
-				if (pc->HasCollider)
-				{
-					if (component["collider_type"])
-						pc->Collider.Type = component["collider_type"].as<std::string>();
-					if (component["collider_width"])
-						pc->Collider.Width = component["collider_width"].as<float>();
-					if (component["collider_height"])
-						pc->Collider.Height = component["collider_height"].as<float>();
-					if (component["collider_radius"])
-						pc->Collider.Radius = component["collider_radius"].as<float>();
-				}
-				if (component["has_trigger"])
-					pc->HasTrigger = component["has_trigger"].as<bool>();
-				if (pc->HasTrigger)
-				{
-					if (component["trigger_type"])
-						pc->Trigger.Type = component["trigger_type"].as<std::string>();
-					if (component["trigger_width"])
-						pc->Trigger.Width = component["trigger_width"].as<float>();
-					if (component["trigger_height"])
-						pc->Trigger.Height = component["trigger_height"].as<float>();
-					if (component["trigger_radius"])
-						pc->Trigger.Radius = component["trigger_radius"].as<float>();
-				}
-			}
-
-			// Add more built-in components...
 		}
 
-		mScene->m_Actors.push_back(deserialized);
+		mScene->mActors.push_back(deserialized);
 	}
+
+
+	// Make Actors Lua look up table
+	luabridge::LuaRef actorsTable = luabridge::newTable(LuaManager::GetLuaState());
+
+	for (Actor* actor : mScene->GetActors())
+		actorsTable[actor->GetName()] = actor->Ref;
+
+	luabridge::setGlobal(LuaManager::GetLuaState(), actorsTable, "Actors");
 }
 
 void SceneSerializer::DeserializeRuntime(const std::string& path)
 {
+}
+
+bool SceneSerializer::IsBool(YAML::Node node)
+{
+	try
+	{
+		bool value = node.as<bool>();
+		return true;
+	}
+	catch (const YAML::BadConversion& e )
+	{
+		return false;
+	}
+}
+
+bool SceneSerializer::IsInt(YAML::Node node)
+{
+	try
+	{
+		bool value = node.as<int>();
+		return true;
+	}
+	catch (const YAML::BadConversion& e)
+	{
+		return false;
+	}
+}
+
+bool SceneSerializer::IsFloat(YAML::Node node)
+{
+	try
+	{
+		bool value = node.as<float>();
+		return true;
+	}
+	catch (const YAML::BadConversion& e)
+	{
+		return false;
+	}
+}
+
+bool SceneSerializer::IsString(YAML::Node node)
+{
+	try
+	{
+		std::string value = node.as<std::string>();
+		return true;
+	}
+	catch (const YAML::BadConversion& e)
+	{
+		return false;
+	}
 }

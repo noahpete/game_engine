@@ -167,6 +167,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Editor\Editor.cpp" />
+    <ClCompile Include="src\FrameCounter.cpp" />
+    <ClCompile Include="src\Render\Camera.cpp" />
+    <ClCompile Include="src\Render\RenderRequest.cpp" />
+    <ClCompile Include="src\Keys.cpp" />
+    <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="include\box2d\collision\b2_broad_phase.cpp" />
     <ClCompile Include="include\box2d\collision\b2_chain_shape.cpp" />
     <ClCompile Include="include\box2d\collision\b2_circle_shape.cpp" />
@@ -245,11 +251,8 @@
     <ClCompile Include="include\lua\lvm.c" />
     <ClCompile Include="include\lua\lzio.c" />
     <ClCompile Include="src\LuaManager.cpp" />
-    <ClCompile Include="src\Components\Physics.cpp" />
-    <ClCompile Include="src\Components\Transform.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\InputHandler.cpp" />
-    <ClCompile Include="src\Components\Component.cpp" />
     <ClCompile Include="src\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="include\glm\detail\glm.cpp" />
@@ -261,12 +264,19 @@
     <ClCompile Include="include\imgui\imgui_tables.cpp" />
     <ClCompile Include="include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
-    <ClCompile Include="src\Render\Gui.cpp" />
+    <ClCompile Include="src\Editor\Gui.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Render\Renderer.cpp" />
+    <ClCompile Include="src\Scene\TemplateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Editor\Editor.h" />
+    <ClInclude Include="src\FrameCounter.h" />
+    <ClInclude Include="src\Render\Camera.h" />
+    <ClInclude Include="src\Render\RenderRequest.h" />
+    <ClInclude Include="src\Keys.h" />
+    <ClInclude Include="src\Component.h" />
     <ClInclude Include="include\box2d\b2_api.h" />
     <ClInclude Include="include\box2d\b2_block_allocator.h" />
     <ClInclude Include="include\box2d\b2_body.h" />
@@ -395,14 +405,8 @@
     <ClInclude Include="include\lua\lvm.h" />
     <ClInclude Include="include\lua\lzio.h" />
     <ClInclude Include="src\LuaManager.h" />
-    <ClInclude Include="src\Components\Physics.h" />
     <ClInclude Include="src\Log.h" />
-    <ClInclude Include="src\Components\Custom.h" />
     <ClInclude Include="src\InputHandler.h" />
-    <ClInclude Include="src\Components\Component.h" />
-    <ClInclude Include="src\Components\Components.h" />
-    <ClInclude Include="src\Components\Sprite.h" />
-    <ClInclude Include="src\Components\Transform.h" />
     <ClInclude Include="src\Scene\SceneSerializer.h" />
     <ClInclude Include="src\Actor.h" />
     <ClInclude Include="include\glm\common.hpp" />
@@ -881,7 +885,7 @@
     <ClInclude Include="include\yaml-cpp\yaml.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Configurator.h" />
-    <ClInclude Include="src\Render\Gui.h" />
+    <ClInclude Include="src\Editor\Gui.h" />
     <ClInclude Include="include\ryml\ryml.hpp" />
     <ClInclude Include="include\ryml\ryml_std.hpp" />
     <ClInclude Include="src\Events\ApplicationEvent.h" />
@@ -891,6 +895,7 @@
     <ClInclude Include="src\Events\MouseEvent.h" />
     <ClInclude Include="src\Render\Renderer.h" />
     <ClInclude Include="src\Util.h" />
+    <ClInclude Include="src\Scene\TemplateManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dlls\c4core.dll" />

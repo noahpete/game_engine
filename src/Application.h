@@ -4,19 +4,22 @@
 #include "SDL2/SDL.h"
 #include "Configurator.h"
 #include "InputHandler.h"
-#include "Components/Physics.h"
 #include "LuaManager.h"
 #include "Render/Renderer.h"
-#include "Render/Gui.h"
+#include "Editor/Gui.h"
 #include "Scene/Scene.h"
+#include "FrameCounter.h"
+#include "Render/Camera.h"
 
 class Renderer;
+class LuaManager;
 
 class Application
 {
 public:
 	static bool sRunning;
 	static bool sGameRunning;
+	static int sFrameNumber;
 
 	Application();
 	~Application() {}
@@ -27,11 +30,14 @@ public:
 	void Render();
 	void OnModeChange();
 
+	static int GetFrameNumber() { return sFrameNumber; }
+
 private:
 	bool mPrevGameRunning;
 	Renderer* mRenderer;
 	Gui* mGui;
 	Scene* mScene;
+	Scene* mSavedScene;
 	LuaManager* mLuaManager;
 
 };

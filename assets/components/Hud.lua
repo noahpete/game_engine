@@ -9,7 +9,7 @@ Hud = {
 		Audio.Play(1, "mission_start_vocal", false)
 	end,
 
-	OnLateUpdate = function(self)
+	OnRender = function(self)
 		-- Draw Score
 		--Render.DrawUI(self.sprite, self.transform.x, self.transform.y, 0)
 		Text.Draw("Score : " .. score, 500, 10, "NotoSans-Regular", 20, 255, 255, 255, 255)
@@ -49,6 +49,9 @@ Hud = {
 				self.transition_y_vel = -self.transition_y_vel * 0.3
 			end
 
+			Debug.Log("")
+			Debug.Log("Hud Game Over called")
+			Debug.Log("")
 			Image.DrawUIEx("game_over_bad", 0, self.transition_y, 255, 255, 255, 255, 2)
 		end
 	end
