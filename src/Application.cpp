@@ -1,8 +1,8 @@
 #include "Application.h"
 
-bool Application::sRunning;
-bool Application::sGameRunning;
-int Application::sFrameNumber;
+bool State::sRunning;
+bool State::sGameRunning;
+int State::sFrameNumber;
 YAML::Node Configurator::EditorConfig;
 YAML::Node Configurator::GameConfig;
 YAML::Node Configurator::RenderConfig;
@@ -10,23 +10,25 @@ YAML::Node Configurator::RenderConfig;
 
 Application::Application()
 {
+	Audio::PlayAudio(1, "mission_start_vocal", false);
 	Configurator::LoadConfigs();
 
 	mRenderer = new Renderer();
 	mLuaManager = new LuaManager();
 	mGui = new Gui();
 	mScene = new Scene();
+	mAudio = new Audio();
 
 	FrameCounter::Reset();
 
-	sRunning = true;
-	sGameRunning = false;
+	State::sRunning = true;
+	State::sGameRunning = false;
 	mPrevGameRunning = false;
 }
 
 void Application::Run()
 {
-	while (sRunning)
+	while (State::sRunning)
 	{
 		Input();
 		Update();
@@ -39,9 +41,9 @@ void Application::Input()
 	SDL_Event e;
 	while (SDL_PollEvent(&e))
 	{
-		if (e.type == SDL_QUIT) sRunning = false;
+		if (e.type == SDL_QUIT) State::sRunning = false;
 
-		if (!sGameRunning)
+		if (!State::sGameRunning)
 			Gui::Input(&e);
 		else
 			InputHandler::ProcessEvent(&e);
@@ -52,7 +54,7 @@ void Application::Update()
 {
 	OnModeChange();
 
-	if (sGameRunning)
+	if (State::sGameRunning)
 	{
 		for (Actor* actor : Scene::GetActors())
 			if (!actor->IsInitialized())
@@ -64,7 +66,7 @@ void Application::Update()
 		// Return to Editor mode
 		if (InputHandler::GetKey("escape"))
 		{
-			sGameRunning = false;
+			State::sGameRunning = false;
 			return;
 		}
 
@@ -88,14 +90,14 @@ void Application::Render()
 
 void Application::OnModeChange()
 {
-	bool modeChanged = (sGameRunning != mPrevGameRunning);
+	bool modeChanged = (State::sGameRunning != mPrevGameRunning);
 	if (modeChanged)
 	{
 		// Editor -> Game
-		if (sGameRunning)
+		if (State::sGameRunning)
 		{
-			mSavedScene = mScene;
 			FrameCounter::Reset();
+			Scene::UninitializeActors(); // uninitialize actors so Start is called on game start
 			SDL_ShowWindow(Renderer::GetGameWindow());
 		}
 
@@ -113,5 +115,5 @@ void Application::OnModeChange()
 			SDL_HideWindow(Renderer::GetGameWindow());
 		}
 	}
-	mPrevGameRunning = sGameRunning;
+	mPrevGameRunning = State::sGameRunning;
 }

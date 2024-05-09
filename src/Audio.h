@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include "SDL2/SDL.h"
 #include "SDL2_mixer/SDL_mixer.h"
+#include "ApplicationState.h"
 
 class Audio
 {

@@ -2,6 +2,8 @@
 
 #include <memory>
 #include "SDL2/SDL.h"
+#include "Audio.h"
+#include "ApplicationState.h"
 #include "Configurator.h"
 #include "InputHandler.h"
 #include "LuaManager.h"
@@ -17,10 +19,6 @@ class LuaManager;
 class Application
 {
 public:
-	static bool sRunning;
-	static bool sGameRunning;
-	static int sFrameNumber;
-
 	Application();
 	~Application() {}
 
@@ -30,15 +28,15 @@ public:
 	void Render();
 	void OnModeChange();
 
-	static int GetFrameNumber() { return sFrameNumber; }
+	static int GetFrameNumber() { return State::sFrameNumber; }
 
 private:
 	bool mPrevGameRunning;
 	Renderer* mRenderer;
 	Gui* mGui;
 	Scene* mScene;
-	Scene* mSavedScene;
 	LuaManager* mLuaManager;
+	Audio* mAudio;
 
 };
 
